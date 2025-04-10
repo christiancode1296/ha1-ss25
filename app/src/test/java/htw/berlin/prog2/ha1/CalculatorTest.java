@@ -108,5 +108,22 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("press EqualsKey twice after binary operation to repeat the calculation")
+    void testEqualsKey() {
+        Calculator calculator = new Calculator();
+        calculator.pressDigitKey(8);
+        calculator.pressBinaryOperationKey("+");
+        calculator.pressEqualsKey();
+        calculator.pressDigitKey(1);
+        calculator.pressEqualsKey();
+
+        String expected = "9";
+        String actual = calculator.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 }
 
