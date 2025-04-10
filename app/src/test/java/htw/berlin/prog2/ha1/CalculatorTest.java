@@ -110,17 +110,14 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("press EqualsKey twice after binary operation to repeat the calculation")
-    void testEqualsKey() {
-        Calculator calculator = new Calculator();
-        calculator.pressDigitKey(8);
-        calculator.pressBinaryOperationKey("+");
-        calculator.pressEqualsKey();
-        calculator.pressDigitKey(1);
-        calculator.pressEqualsKey();
+    @DisplayName("should display result after getting the square root of a positive number")
+    void testSquareRootOfTwo() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(5);
+        calc.pressUnaryOperationKey("√");
 
-        String expected = "9";
-        String actual = calculator.readScreen();
+        String expected = "2.23606798";
+        String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }

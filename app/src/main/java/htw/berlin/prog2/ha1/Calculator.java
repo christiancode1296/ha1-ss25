@@ -1,4 +1,5 @@
 package htw.berlin.prog2.ha1;
+import java.util.Locale;
 
 /**
  * Eine Klasse, die das Verhalten des Online Taschenrechners imitiert, welcher auf
@@ -74,6 +75,12 @@ public class Calculator {
     public void pressUnaryOperationKey(String operation) {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+
+        double operand = Double.parseDouble(screen);
+        if (operation.equals("√") && operand < 0) {
+            screen = "Error";
+            return;
+        }
         var result = switch(operation) {
             case "√" -> Math.sqrt(Double.parseDouble(screen));
             case "%" -> Double.parseDouble(screen) / 100;
@@ -83,6 +90,8 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        double rounded = Math.round(result * 100000000.0) / 100000000.0; // rundet das Ergebnis auf 8 Stellen nach dem Komma
+        screen = String.format(Locale.US, "%.8f", rounded);
 
     }
 
