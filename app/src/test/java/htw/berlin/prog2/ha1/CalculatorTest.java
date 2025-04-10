@@ -122,5 +122,20 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("add number after equalsKey ")
+    void testAddNumberAfterEqualsKey() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "24";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
 }
 
