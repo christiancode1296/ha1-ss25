@@ -15,6 +15,7 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private boolean resetScreenOnNextDigit = false;
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -32,9 +33,15 @@ public class Calculator {
     public void pressDigitKey(int digit) {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        if (screen.equals("0") || resetScreenOnNextDigit) {
+            screen = "";
+            resetScreenOnNextDigit = false;
+        }
+        screen += digit;
 
-        screen = screen + digit;
+        //if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+
+        //screen = screen + digit;
     }
 
     /**
@@ -63,6 +70,7 @@ public class Calculator {
     public void pressBinaryOperationKey(String operation)  {
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+        screen = "0"; // damit der nächste DigitKey eine neue Zahl startet
     }
 
     /**
@@ -128,8 +136,9 @@ public class Calculator {
      */
     public void pressEqualsKey() {
 
-        if (latestOperation.isEmpty()) {
-            return; // nichts rechnen, einfach aufhören
+        if (latestOperation == null || latestOperation.isEmpty()) {
+            resetScreenOnNextDigit = true;
+            return;
         }
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
