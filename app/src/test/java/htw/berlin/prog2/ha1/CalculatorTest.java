@@ -90,5 +90,23 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    @Test
+    @DisplayName("should display result after substract two positive multi digit numbers")
+    void testPositiveSubtract() {
+        Calculator calculator = new Calculator();
+
+        calculator.pressDigitKey(2);
+        calculator.pressDigitKey(1);
+        calculator.pressBinaryOperationKey("-");
+        calculator.pressDigitKey(1);
+        calculator.pressDigitKey(1);
+        calculator.pressEqualsKey();
+
+        String expected = "10";
+        String actual = calculator.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
