@@ -15,7 +15,7 @@ public class Calculator {
 
     private String latestOperation = "";
 
-    private boolean resetScreenOnNextDigit = false;
+    private boolean resetScreenOnNextDigit = false; //
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
